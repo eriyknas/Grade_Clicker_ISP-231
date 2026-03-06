@@ -24,7 +24,7 @@ private val LightColorScheme = lightColorScheme(
     background = md_theme_light_background
 )
 @Composable
-fun GradeClickerTheme(
+fun Grade_Clicker_ISP231Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
