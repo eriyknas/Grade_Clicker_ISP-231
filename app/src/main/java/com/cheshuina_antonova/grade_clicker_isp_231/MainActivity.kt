@@ -1,6 +1,7 @@
 package com.cheshuina_antonova.grade_clicker_isp_231
 
 import android.os.Bundle
+import android.util.Log
 import android.view.SurfaceControl
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -24,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,9 +40,11 @@ import com.cheshuina_antonova.grade_clicker_isp_231.model.Grade
 import com.cheshuina_antonova.grade_clicker_isp_231.ui.theme.Grade_Clicker_ISP231Theme
 import com.google.android.gms.wallet.TransactionInfo
 
+private const val TAG = "MainActivity"
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate Called")
         enableEdgeToEdge()
         setContent {
             Grade_Clicker_ISP231Theme {
@@ -49,16 +53,46 @@ class MainActivity : ComponentActivity() {
                 ) {
                     GradeClickerApp(grades = Datasource.gradeList)
                 }
-
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy Called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart Called")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart Called")
+    }
 }
+
 
 @Composable
 fun GradeClickerApp(grades: List<Grade>){
-    var points by remember { mutableStateOf(0) }
-    var clicks by remember { mutableStateOf(0) }
+    var points by rememberSaveable { mutableStateOf(0) }
+    var clicks by rememberSaveable { mutableStateOf(0) }
     val currentGrade = determineGradeToShow(grades, points)
     Column(
         modifier = Modifier
